@@ -1,5 +1,11 @@
 package br.com.edp.luma.dao;
 
-public class ClienteDao {
+import java.sql.Connection;
 
+public class ClienteDao {
+	private Connection conn;
+	
+	public ClienteDao() throws Exception {
+		//conn =  ConexaoFactory.retornarConexao();
+	}
 }

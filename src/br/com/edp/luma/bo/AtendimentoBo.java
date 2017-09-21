@@ -1,5 +1,5 @@
 package br.com.edp.luma.bo;
 
-public class LigacaoBo {
+public class AtendimentoBo {
 
 }

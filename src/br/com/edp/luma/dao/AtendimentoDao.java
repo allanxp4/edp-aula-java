@@ -1,5 +1,5 @@
 package br.com.edp.luma.dao;
 
-public class LigacaoDao {
+public class AtendimentoDao {
 
 }
