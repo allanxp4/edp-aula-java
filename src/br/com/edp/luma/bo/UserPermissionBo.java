@@ -34,6 +34,7 @@ public class UserPermissionBo {
 		
 		
 		
+		
 		UserPermissionDao dao = new UserPermissionDao();
 		UserPermission x = dao.avaliar(id_user, tipo_pessoa);
 		dao.fechar();
