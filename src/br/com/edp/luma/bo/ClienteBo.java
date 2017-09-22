@@ -1,6 +1,5 @@
 package br.com.edp.luma.bo;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import br.com.edp.luma.beans.Cliente;
@@ -17,60 +16,76 @@ public class ClienteBo {
 		if(cliente.getNome().length()>50){
 			return "Nome execedeu a quantidade de caracteres";
 		}
-		try{
+		if(cliente.getCpf().length()!=11){
+			return "Cpf inv�lido";
+		}
+		if(cliente.getEmail().contentEquals("@")==false){
+			return "E-mail inv�lido";
+		}
+		if(cliente.getId()<=0){
+			return "Id inv�lido";
+		}
+		if(cliente.getTelefone().length()<8 || cliente.getTelefone().length()>22){
+			return "Telefone inv�lido";
+		}
+		else{
 		cliente.setNome(cliente.getNome().toUpperCase());
-		String x = dao.adicionar(cliente);
+		String x = dao.adicionar(cliente, null);
 		dao.fechar();
 		return x;
-		} catch (SQLException e){
-			return null;
+		}
 	}
-	}
+	
 	public String atualizarCliente(Cliente cliente)throws Exception{
-		try{
+		if(cliente.getNome().length()>50){
+			return "Nome execedeu a quantidade de caracteres";
+		}
+		if(cliente.getCpf().length()!=11){
+			return "Cpf inv�lido";
+		}
+		if(cliente.getEmail().contentEquals("@")==false){
+			return "E-mail inv�lido";
+		}
+		if(cliente.getId()<=0){
+			return "Id inv�lido";
+		}
+		if(cliente.getTelefone().length()<8 || cliente.getTelefone().length()>22){
+			return "Telefone inv�lido";
+		}
+		else{
 			cliente.setNome(cliente.getNome().toUpperCase());
-			String x = dao.atualizar(cliente);
+			String x = dao.atualizar(cliente, null);
 			dao.fechar();
 			return x;
 		}
-		catch(SQLException e){	
-		}
-		return null;
 	}
 			
 		public String removerCliente(Cliente cliente)throws Exception{
-			try{
+			if(cliente.getId()<=0){
+				return "Id inv�lido";
+			}else{
 				cliente.setNome(cliente.getNome().toUpperCase());
 				String x = dao.apagar(cliente);
 				dao.fechar();
 				return x;
 			}
-			catch(SQLException e){	
-			}
-			return null;
 		}
 		
 		public Cliente buscarCliente(int id)throws Exception{
-			try{
+		{
 				Cliente x = dao.getCliente(id);
 				dao.fechar();
 				return x;
 				
 			}
-			catch(SQLException e){
-				
-			}
-			return null;
+		
 		}
 		
-		public List<Cliente> getTodosClientes(){
-			try{
+		public List<Cliente> getTodosClientes() throws Exception{
+			{
 				return dao.getClientes();
 			}
-			catch(SQLException e){
-				
-			}
-			return null;
+		
 		}
 	
 		

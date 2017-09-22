@@ -21,7 +21,7 @@ public class ClienteDao {
 		con.close();
 	}
 	
-	public String adicionar(Cliente cliente) throws SQLException{
+	public String adicionar(Cliente cliente, Local local) throws SQLException{
 		String sql = "INSERT INTO cliente (id, nome, email, telefone, cpf, login, senha, local)"
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement estrutura = con.prepareStatement(sql);
@@ -32,13 +32,13 @@ public class ClienteDao {
 		estrutura.setString(5, cliente.getCpf());
 		estrutura.setString(6, cliente.getLogin());
 		estrutura.setString(7, cliente.getSenha());
-		estrutura.setInt(8, Local.getId());
+		estrutura.setInt(8, local.getid());
 		int x = estrutura.executeUpdate();
 		estrutura.close();
 		return x + " cliente(s) foi(ram) adicionado(s)";
 	}
 	
-	public String atualizar(Cliente cliente) throws SQLException{
+	public String atualizar(Cliente cliente,Local local) throws SQLException{
 		String sql = "UPDATE cliente (id, nome, email, telefone, cpf, login, senha, local)"
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement estrutura = con.prepareStatement(sql);
@@ -49,7 +49,7 @@ public class ClienteDao {
 		estrutura.setString(5, cliente.getCpf());
 		estrutura.setString(6, cliente.getLogin());
 		estrutura.setString(7, cliente.getSenha());
-		estrutura.setInt(8, Local.getId());
+		estrutura.setInt(8, local.getid());
 		int x = estrutura.executeUpdate();
 		estrutura.close();		
 		return x + " cliente(s) foi(ram) atualizado(s)";
@@ -69,13 +69,14 @@ public class ClienteDao {
 		ResultSet set = estrutura.executeQuery();
 	
 		Cliente cliente = new Cliente();
+		Local local = new Local();
 		if(set.next()){
 			cliente.setId(set.getInt("id"));
 			cliente.setNome(set.getString("nome"));
 			cliente.setEmail(set.getString("email"));
 			cliente.setTelefone(set.getString("telefone"));
 			cliente.setCpf(set.getString("cpf"));
-			Local.setId(set.getInt("local Id"));
+			local.setid(set.getInt("local Id"));
 		}
 		estrutura.close();
 		set.close();
@@ -89,12 +90,13 @@ public class ClienteDao {
 			List<Cliente> clientes = new ArrayList<>();
 			while(set.next()){
 				Cliente cliente = new Cliente();
+				Local local = new Local();
 				cliente.setId(set.getInt("id"));
 				cliente.setNome(set.getString("nome"));
 				cliente.setEmail(set.getString("email"));
 				cliente.setTelefone(set.getString("telefone"));
 				cliente.setCpf(set.getString("cpf"));
-				Local.setId(set.getInt("local id"));
+				local.setid(set.getInt("local id"));
 				clientes.add(cliente);
 			}
 		
