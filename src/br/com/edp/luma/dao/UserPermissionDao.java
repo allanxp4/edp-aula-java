@@ -39,12 +39,11 @@ public class UserPermissionDao{
 		}
 	
 		public boolean adicionarPermissao(UserPermission permissao) throws SQLException{
-			String sql = "INSERT INTO USERPERMISSIONS (ID, TIPO_PERMISSAO, TIPO_PESSOA)"
-					+ "VALUES (?, ?, ?)";;
+			String sql = "INSERT INTO USERPERMISSIONS (TIPO_PERMISSAO, TIPO_PESSOA)"
+					+ "VALUES (?, ?)";;
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, permissao.getUserId());
-			stmt.setInt(2, permissao.getNivelPermissao());
-			stmt.setString(3, permissao.getTipoPessoa());
+			stmt.setInt(1, permissao.getNivelPermissao());
+			stmt.setString(2, permissao.getTipoPessoa());
 			return stmt.execute();
 		}
 		

@@ -18,8 +18,8 @@ public class LocalDao {
 		conn = ConnectionFactory.getConnection();
 	}
 	  public boolean adicionar( Local local) throws SQLException{
-		  String sql = "INSERT INTO locais (pais,cidade,bairro,rua,n_residencia,id)"
-				       + "VALUES (?,?,?,?,?,?)";
+		  String sql = "INSERT INTO locais (pais,cidade,bairro,rua,n_residencia)"
+				       + "VALUES (?,?,?,?,?)";
 		  
 		  PreparedStatement stmt = conn.prepareStatement(sql);
 		  stmt.setString(1, local.getpais());
@@ -27,20 +27,18 @@ public class LocalDao {
 			stmt.setString(3, local.getbairro());
 			stmt.setString(4, local.getrua());
 			stmt.setInt(5, local.getn_residencia());
-			stmt.setInt(6,local.getid());
 			return stmt.execute();
 	  }
 
 	  public boolean editar(Local local) throws SQLException{
 			String sql = "UPDATE locais (pais,cidade,bairro,rua,n_residencia,id)"
-					+ "SET (?, ?, ?, ?, ?, ?) WHERE id = ?";
+					+ "SET (?, ?, ?, ?, ?) WHERE id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, local.getpais());
 			stmt.setString(2, local.getcidade());
 			stmt.setString(3, local.getbairro());
 			stmt.setString(4, local.getrua());
 			stmt.setInt(5, local.getn_residencia());
-			stmt.setInt(6,local.getid());
 			return stmt.execute();
 		}
 
